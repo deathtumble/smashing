@@ -1,0 +1,13 @@
+<h3 class="title">Smoke Test</h3>
+<h1 class="title" data-bind="title"></h1>
+
+<ol>
+  <li data-foreach-item="items">
+    <a data-bind-href="item.uri"  target="_blank">  
+        <span data-bind-class="item.status" data-bind="item.server">
+        </span>
+    </a>
+  </li>
+</ol>
+
+<p class="updated-at" data-bind="updatedAtMessage"></p>

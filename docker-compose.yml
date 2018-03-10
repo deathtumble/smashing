@@ -1,0 +1,14 @@
+version: '3'
+services:
+   dashing:
+     build: ../dockerfile-alpine_smashing
+     ports: 
+     - "8081:80"
+     environment:
+     - PORT=80
+     volumes:
+      - ./dashboards:/dashboards
+      - ./jobs:/jobs
+      - ./widgets:/widgets
+      - ./config:/config
+     image: smashing:latest
