@@ -29,9 +29,10 @@ SCHEDULER.every '20s' do
     end
 
     if (hasEndpoint)
-      uriString = 'http://' + server["publicIpAddress"] + ':8082/healthz'
+      privateUriString = 'http://' + server["privateIpAddress"] + ':8082/healthz'
+      publicUriString = 'http://' + server["publicIpAddress"] + ':8082/healthz'
 
-      uri = URI.parse(uriString)
+      uri = URI.parse(privateUriString)
       http = Net::HTTP.new(uri.host, uri.port)
       http.read_timeout = 2
 
@@ -45,7 +46,7 @@ SCHEDULER.every '20s' do
         status = 'failure'
       end
 
-      statuses.push({:status => status, :server => serverName, :uri => uriString, :ecosystem => ecosystem, :environment => environment})
+      statuses.push({:status => status, :server => serverName, :uri => publicUriString, :ecosystem => ecosystem, :environment => environment})
     else 
       statuses.push({:status => 'warning', :server => serverName, :ecosystem => ecosystem, :environment => environment})
     end
