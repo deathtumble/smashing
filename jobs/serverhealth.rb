@@ -31,10 +31,15 @@ SCHEDULER.every '20s' do
     if (elbUrl)
       uri = URI.parse(elbUrl)
       http = Net::HTTP.new(uri.host, uri.port)
-      http.read_timeout = 10
+      http.read_timeout = 2
+      http.open_timeout = 2
 
       request = Net::HTTP::Get.new(uri.request_uri)
-      response = http.request(request)
+
+      begin        
+        response = http.request(request)
+      rescue Timeout::Error
+      end  
         
       if response.code == "200"
         status = 'success'
