@@ -34,11 +34,11 @@ SCHEDULER.every '20s' do
 
       uri = URI.parse(privateUriString)
 
-      http = Net::HTTP.new(url.host, url.port)
+      http = Net::HTTP.new(uri.host, uri.port)
       http.read_timeout = 5
       http.open_timeout = 5
       response = http.start() {|http|
-          http.get(url.path)
+          http.get(uri.path)
       }
       
       if response.code == "200"
