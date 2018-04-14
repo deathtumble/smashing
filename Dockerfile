@@ -29,10 +29,10 @@ COPY public /smashing/public
 COPY widgets /smashing/widgets 
 COPY jobs /smashing/jobs 
 
-COPY run.sh /
+COPY run.sh /smashing
 
 ENV PORT 3030
 EXPOSE ${PORT}
 WORKDIR /smashing
 
-CMD ["/run.sh"]
+CMD ["/smashing/run.sh"]
