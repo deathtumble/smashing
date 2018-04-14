@@ -34,7 +34,7 @@ SCHEDULER.every '20s' do
 
       uri = URI.parse(privateUriString)
 
-      response = Net::HTTP.start(uri.host, uri.port, :read_timeout = 10, :open_timeout = 10) {
+      response = Net::HTTP.start(uri.host, uri.port, :read_timeout => 10, :open_timeout => 10) {
         |http| http.request(request)
       }
 

@@ -31,7 +31,7 @@ SCHEDULER.every '20s' do
     if (elbUrl)
       uri = URI.parse(elbUrl)
 
-      response = Net::HTTP.start(uri.host, uri.port, :read_timeout = 10, :open_timeout = 10) {
+      response = Net::HTTP.start(uri.host, uri.port, :read_timeout => 10, :open_timeout => 10) {
         |http| http.request(request)
       }
 
