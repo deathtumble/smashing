@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.5
+FROM alpine:3.7
 
 LABEL maintainer "Ramón G. Camus <rgcamus@gmail.com>"
 
