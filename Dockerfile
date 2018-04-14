@@ -21,6 +21,7 @@ WORKDIR /smashing
 RUN cd /smashing 
 RUN bundle 
     
+COPY run.sh /smashing/
 COPY dashboards /smashing/dashboards 
 COPY jobs /smashing/jobs 
 COPY lib-smashing /smashing/lib-smashing 
@@ -28,8 +29,6 @@ COPY config /smashing/config
 COPY public /smashing/public 
 COPY widgets /smashing/widgets 
 COPY jobs /smashing/jobs 
-
-COPY run.sh /smashing/
 
 ENV PORT 3030
 EXPOSE ${PORT}
