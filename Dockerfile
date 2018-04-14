@@ -29,7 +29,7 @@ COPY public /smashing/public
 COPY widgets /smashing/widgets 
 COPY jobs /smashing/jobs 
 
-COPY run.sh /smashing
+COPY run.sh /smashing/
 
 ENV PORT 3030
 EXPOSE ${PORT}
