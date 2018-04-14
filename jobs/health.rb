@@ -33,13 +33,11 @@ SCHEDULER.every '20s' do
       publicUriString = 'http://' + server["publicIpAddress"] + ':8082/healthz'
 
       uri = URI.parse(privateUriString)
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.read_timeout = 2
 
-      request = Net::HTTP::Get.new(uri.request_uri)
-      
-      response = http.request(request)
-        
+      response = Net::HTTP.start(uri.host, uri.port, :read_timeout = 10, :open_timeout = 10) {
+        |http| http.request(request)
+      }
+
       if response.code == "200"
         status = 'success'
       else
