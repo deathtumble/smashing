@@ -33,20 +33,26 @@ SCHEDULER.every '20s' do
       publicUriString = 'http://' + server["publicIpAddress"] + ':8082/healthz'
 
       uri = URI.parse(privateUriString)
-
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.read_timeout = 5
-      http.open_timeout = 5
-      response = http.start() {|http|
-          http.get(uri.path)
-      }
       
-      if response.code == "200"
-        status = 'success'
-      else
-        status = 'failure'
-      end
+      puts(privateUriString)
 
+      begin  
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.read_timeout = 5
+        http.open_timeout = 5
+        response = http.start() {|http|
+          http.get(uri.path)
+        }
+   
+        if response.code == "200"
+          status = 'success'
+        else
+          status = 'failure'
+        end
+      rescue
+        status = 'failure'
+      end  
+      
       statuses.push({:status => status, :server => serverName, :uri => publicUriString, :ecosystem => ecosystem, :environment => environment})
     else 
       statuses.push({:status => 'warning', :server => serverName, :ecosystem => ecosystem, :environment => environment})

@@ -31,18 +31,22 @@ SCHEDULER.every '20s' do
     if (elbUrl)
       uri = URI.parse(elbUrl)
 
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.read_timeout = 5
-      http.open_timeout = 5
-      response = http.start() {|http|
+      begin  
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.read_timeout = 5
+        http.open_timeout = 5
+        response = http.start() {|http|
           http.get(uri.path)
-      }
-
-      if response.code == "200"
-        status = 'success'
-      else
+        }
+   
+        if response.code == "200"
+          status = 'success'
+        else
+          status = 'failure'
+        end
+      rescue
         status = 'failure'
-      end
+      end  
 
       statuses.push({:status => status, :service => serverName, :uri => elbUrl, :ecosystem => ecosystem, :environment => environment})
     else 
