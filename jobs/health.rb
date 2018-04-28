@@ -34,8 +34,6 @@ SCHEDULER.every '20s' do
 
       uri = URI.parse(privateUriString)
       
-      puts(privateUriString)
-
       begin  
         http = Net::HTTP.new(uri.host, uri.port)
         http.read_timeout = 5
