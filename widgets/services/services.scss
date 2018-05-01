@@ -28,18 +28,16 @@ $amber-alert-color: #000000;
     padding-left: 5px;
   }
 
-  .health-container {
-    display: none;
-  }
-  
   li {
     list-style-type: none;
   }
   
-  span {
-    display: block;
+  tr {
     padding-left: 10px;
     text-align: left;
+  }
+
+  td {
 
     &.success {
       background-color: $green-alert-background-color;

@@ -8,8 +8,8 @@
   <tr>  
   <tr data-foreach-item="items">
     <td data-bind="item.service" />
-    <td data-bind="item.runningTasks | append ' up of ' | append item.desiredTasks" />
-    <td data-bind="item.healthyTargets | append ' up of ' | append item.targets" />
+    <td data-bind-class="item.tasksStatus" data-bind="item.runningTasks | append ' up of ' | append item.desiredTasks" />
+    <td data-bind-class="item.targetsStatus" data-bind="item.healthyTargets | append ' up of ' | append item.targets" />
   </tr>
 </table>
 
