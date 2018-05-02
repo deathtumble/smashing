@@ -2,7 +2,7 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-SCHEDULER.every '20s' do
+SCHEDULER.every '10s' do
 
   proxyUri = "http://172.17.0.1:8080/services";
   uri = URI.parse(proxyUri)
@@ -44,6 +44,8 @@ SCHEDULER.every '20s' do
   end
   
   environments.each do |environment, statuses|
-     send_event('services_' + environment, { :items => statuses})
+     if !environment.nil?
+        send_event('services_' + environment, { :items => statuses})
+     end   
   end   
 end
