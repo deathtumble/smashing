@@ -41,4 +41,7 @@ COPY artifacts/startup-script /var/startup-script
 COPY artifacts/smashing-consul.json /var/smashing-consul.json
 COPY artifacts/smashing-goss.yaml /var/smashing-goss.yaml
 
+RUN cp /var/startup-script /usr/local/bin/startup-script
+RUN chmod 774 /usr/local/bin/startup-script
+
 ENTRYPOINT ["/usr/local/bin/startup-script"]
