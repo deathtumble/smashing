@@ -41,6 +41,4 @@ COPY artifacts/startup-script /var/startup-script
 COPY artifacts/smashing-consul.json /var/smashing-consul.json
 COPY artifacts/smashing-goss.yaml /var/smashing-goss.yaml
 
-ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
-CMD ["/usr/local/bin/startup-script"]
-CMD ["/smashing/run.sh"]
+ENTRYPOINT ["/usr/local/bin/startup-script"]
