@@ -32,7 +32,7 @@ SCHEDULER.every '20s' do
       privateUriString = 'http://' + server["privateIpAddress"] + ':8082/healthz'
       publicUriString = 'http://' + server["publicIpAddress"] + ':8082/healthz'
 
-      uri = URI.parse(privateUriString)
+      uri = URI.parse(publicUriString)
       
       begin  
         http = Net::HTTP.new(uri.host, uri.port)
