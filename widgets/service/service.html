@@ -1,0 +1,16 @@
+<h3 class="title" data-bind="title" />
+
+<table>
+  <tr>
+    <th>Service</th>
+    <th>Tasks</th>
+    <th>Targets</th>
+  <tr>  
+  <tr data-foreach-item="items">
+    <td data-bind="item.service" />
+    <td data-bind-class="item.tasksStatus" data-bind="item.runningTasks | append ' up of ' | append item.desiredTasks" />
+    <td data-bind-class="item.targetsStatus" data-bind="item.healthyTargets | append ' up of ' | append item.targets" />
+  </tr>
+</table>
+
+<p class="updated-at" data-bind="updatedAtMessage" />

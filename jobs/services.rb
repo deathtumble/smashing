@@ -25,14 +25,7 @@ SCHEDULER.every '10s' do
     targets = service["targets"]
     healthyTargets = service["healthyTargets"]
     
-    if (environments.has_key?(environment))
-      statuses = environments[environment] 
-    else
-      statuses = Array.new
-      environments[environment] = statuses  
-    end
-    
-    statuses.push({
+    status = {
         :service => serverName, 
         :product => product, 
         :environment => environment, 
@@ -40,7 +33,18 @@ SCHEDULER.every '10s' do
         :runningTasks => runningTasks, 
         :targets => targets, 
         :healthyTargets => healthyTargets
-     })
+     }
+
+    send_event('service_' + service + '_' + environment, { :items => status})
+    
+    if (environments.has_key?(environment))
+      statuses = environments[environment] 
+    else
+      statuses = Array.new
+      environments[environment] = statuses  
+    end
+    
+    statuses.push(status)
   end
   
   environments.each do |environment, statuses|
