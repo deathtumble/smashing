@@ -1,16 +1,42 @@
-<h3 class="title" data-bind="title" />
-
-<table>
-  <tr>
-    <th>Service</th>
-    <th>Tasks</th>
-    <th>Targets</th>
-  <tr>  
-  <tr data-foreach-item="items">
-    <td data-bind="item.service" />
-    <td data-bind-class="item.tasksStatus" data-bind="item.runningTasks | append ' up of ' | append item.desiredTasks" />
-    <td data-bind-class="item.targetsStatus" data-bind="item.healthyTargets | append ' up of ' | append item.targets" />
-  </tr>
-</table>
-
-<p class="updated-at" data-bind="updatedAtMessage" />
+<div data-hideif="items.lost | equals true">
+    <h3 class='title'>
+       <a data-bind-href='items.serviceurl' data-bind='items.service'  target='_blank'></a>
+    </h3>
+	<ul>
+	  <li data-bind-class='items.tasksStatus'>
+	     <h4 class='title'>Container Tasks</h4>
+	  </li>
+	  <li data-bind-class='items.tasksStatus'>
+	    <span data-bind='items.runningTasks'></span>
+	    tasks running  
+	  </li>
+	  <li data-bind-class='items.tasksStatus'>
+	    <span data-bind='items.desiredTasks'></span>
+	    tasks expected
+        <span data-bind='items.lost'></span>
+	  </li>
+	</ul>  
+	
+	<ul>
+	  <li data-bind-class='items.targetsStatus'>
+	    <h4 class='title'>Load Balancer</h4>  
+	  </li>
+	  <li data-bind-class='items.targetsStatus'>
+	    <span data-bind='items.healthyTargets'></span>
+	    targets healthy
+	  </li>
+	  <li data-bind-class='items.targetsStatus' >
+	   <span data-bind='items.targets'></span>
+	    targets expected
+	  </li>
+	</ul>  
+</div>
+<div data-showif="items.lost | equals true">
+    <h3 data-bind='items.service'></h3>
+    <ul>
+      <li class='failure'>
+         <h4 class='title'>Service Not Found</h4>
+      </li>
+    </ul>  
+</div>
+<p class='updated-at' data-bind='updatedAtMessage' />

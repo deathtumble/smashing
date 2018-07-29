@@ -16,7 +16,6 @@ SCHEDULER.every '10s' do
   statuses = Array.new
     
   services.each do |service|
-    elbUrl = service["elbUrl"]
     serverName = service["name"]
     product = service["product"]
     environment = service["environment"]
@@ -25,17 +24,24 @@ SCHEDULER.every '10s' do
     targets = service["targets"]
     healthyTargets = service["healthyTargets"]
     
+    serviceName = serverName.split(/-/).first
+    
+    eventName = "service_#{serviceName}_#{environment}"
+    
     status = {
-        :service => serverName, 
+        :service => serverName.split(/-/).first, 
         :product => product, 
         :environment => environment, 
         :desiredTasks => desiredTasks, 
         :runningTasks => runningTasks, 
         :targets => targets, 
-        :healthyTargets => healthyTargets
+        :healthyTargets => healthyTargets,
+        :lost => "false",
+        :serviceurl => "",
+        :source => "events"
      }
 
-    send_event('service_' + service + '_' + environment, { :items => status})
+    send_event(eventName, { :items => status})
     
     if (environments.has_key?(environment))
       statuses = environments[environment] 

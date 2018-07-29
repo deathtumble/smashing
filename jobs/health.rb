@@ -21,60 +21,47 @@ SCHEDULER.every '20s' do
     ecosystem = server["ecosystem"]
     environment = server["environment"]
     
-    if (environments.has_key?(environment))
-      statuses = environments[environment] 
-    else
-      statuses = Array.new
-      environments[environment] = statuses  
-    end
-
-    if (hasEndpoint)
-      privateUriString = 'http://' + server["privateIpAddress"] + ':8082/healthz'
-      publicUriString = 'http://' + server["publicIpAddress"] + ':8082/healthz'
-
-      uri = URI.parse(privateUriString)
-      
-      begin  
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.read_timeout = 5
-        http.open_timeout = 5
-        response = http.start() {|http|
-          http.get(uri.path)
-        }
-   
-        if response.code == "200"
-          status = 'success'
+    if (environment != "")
+        if (environments.has_key?(environment))
+          statuses = environments[environment] 
         else
-          status = 'failure'
+          statuses = Array.new
+          environments[environment] = statuses  
         end
-      rescue
-        uri = URI.parse(publicUriString)
-
-        begin
-          http = Net::HTTP.new(uri.host, uri.port)
-          http.read_timeout = 5
-          http.open_timeout = 5
-          response = http.start() {|http|
-            http.get(uri.path)
-          }
-
-          if response.code == "200"
-            status = 'success'
-          else
+    
+        if (hasEndpoint)
+          privateUriString = 'http://' + server["privateIpAddress"] + ':8082/healthz'
+          publicUriString = 'http://' + server["publicIpAddress"] + ':8082/healthz'
+    
+          uri = URI.parse(publicUriString)
+          
+          begin  
+            http = Net::HTTP.new(uri.host, uri.port)
+            http.read_timeout = 5
+            http.open_timeout = 5
+            response = http.start() {|http|
+              http.get(uri.path)
+            }
+       
+            if response.code == "200"
+              status = 'success'
+            else
+              status = 'failure'
+            end
+          rescue
             status = 'failure'
-          end
-        rescue
-          status = 'failure'
+          end  
+          
+          statuses.push({:status => status, :server => serverName, :uri => publicUriString, :ecosystem => ecosystem, :environment => environment})
+        else 
+          statuses.push({:status => 'warning', :server => serverName, :ecosystem => ecosystem, :environment => environment})
         end
-      end  
-      
-      statuses.push({:status => status, :server => serverName, :uri => publicUriString, :ecosystem => ecosystem, :environment => environment})
-    else 
-      statuses.push({:status => 'warning', :server => serverName, :ecosystem => ecosystem, :environment => environment})
-    end
+     end   
   end
   
   environments.each do |environment, statuses|
+     puts environment
+  
      send_event('health_' + environment, { :items => statuses})
   end   
 end

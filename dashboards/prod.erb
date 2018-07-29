@@ -1,32 +1,35 @@
+<script type='text/javascript'>
+$(function() {
+  // These settings override the defaults set in application.coffee. You can do this on a per dashboard basis.
+  Dashing.widget_base_dimensions = [370, 340]
+  Dashing.numColumns = 3
+});
+</script>
 <% content_for :title do %>Production Environment Status<% end %>
 <div class="gridster">
   <ul>
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="service_consul_prod" data-view="Service" data-environment="prod" data-title="Consul Service Status"></div>
+      <div data-id="service_consul_prod" data-view="Service" data-title="Consul" data-url="http://poc-prod.urbanfortress.uk:8500"></div>
     </li>
 
     <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
-      <div data-id="service_dashing_prod" data-view="Service" data-environment="prod" data-title="Dashing Service Status"></div>
+      <div data-id="service_dashing_prod" data-view="Service" data-title="Dashing" data-url="http://poc-prod.urbanfortress.uk/sample"></div>
     </li>
 
     <li data-row="1" data-col="3" data-sizex="1" data-sizey="1">
-      <div data-id="service_nexus_prod" data-view="Service" data-environment="prod" data-title="Nexus Service Status"></div>
+      <div data-id="service_nexus_prod" data-view="Service" data-title="Nexus" data-url="http://poc-prod.urbanfortress.uk:8081/"></div>
     </li>
 
-    <li data-row="1" data-col="4" data-sizex="1" data-sizey="1">
-      <div data-id="service_concourse_prod" data-view="Service" data-environment="prod" data-title="Concourse Service Status"></div>
+    <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="service_concourse_prod" data-view="Service" data-title="Concourse" data-url="http://poc-prod.urbanfortress.uk:8080/"></div>
     </li>
 
-    <li data-row="1" data-col="5" data-sizex="1" data-sizey="1">
-      <div data-id="service_monitoring_prod" data-view="Service" data-environment="prod" data-title="Monitoring Service Status"></div>
+    <li data-row="2" data-col="2" data-sizex="1" data-sizey="1">
+      <div data-id="service_monitoring_prod" data-view="Service" data-title="Monitoring" data-url="http://poc-prod.urbanfortress.uk:3000"></div>
     </li>
 
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="health_prod" data-view="Health" data-environment="prod" data-title="Murray's Servers"></div>
-    </li>
-
-    <li data-row="2" data-col="2" data-sizex="2" data-sizey="1">
-      <div data-id="services_prod" data-view="Services" data-environment="prod" data-title="Production's Services"></div>
+    <li data-row="2" data-col="3" data-sizex="1" data-sizey="1">
+      <div data-id="health_prod" data-view="Health" data-environment="prod" data-title="Production Servers"></div>
     </li>
   </ul>
 </div>
