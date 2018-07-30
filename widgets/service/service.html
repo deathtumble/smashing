@@ -1,37 +1,43 @@
-<div data-hideif="items.lost | equals true">
+<div data-hideif="lost | equals true">
     <h3 class='title'>
-       <a data-bind-href='items.serviceurl' data-bind='items.service'  target='_blank'></a>
+       <a data-bind-href='serviceurl' data-bind='service'  target='_blank'></a>
     </h3>
 	<ul>
-	  <li data-bind-class='items.tasksStatus'>
-	     <h4 class='title'>Container Tasks</h4>
+	  <li data-bind-class='tasksstatus'>
+	     <h4 class='title'>
+	         <span data-bind-class='tasksstatus'>Container Tasks</span>
+	     </h4>
 	  </li>
-	  <li data-bind-class='items.tasksStatus'>
-	    <span data-bind='items.runningTasks'></span>
-	    tasks running  
+	  <li data-bind-class='tasksstatus'>
+        <span data-bind-class='tasksstatus'>
+	        <span data-bind='runningTasks'></span>
+	        tasks running
+	    </span>      
 	  </li>
-	  <li data-bind-class='items.tasksStatus'>
-	    <span data-bind='items.desiredTasks'></span>
-	    tasks expected
+	  <li data-bind-class='tasksstatus'>
+        <span data-bind-class='tasksstatus'>
+            <span data-bind='desiredTasks'></span>
+	        tasks expected
+        </span>      
 	  </li>
 	</ul>  
 	
 	<ul>
-	  <li data-bind-class='items.targetsStatus'>
+	  <li data-bind-class='targetsstatus'>
 	    <h4 class='title'>Load Balancer</h4>  
 	  </li>
-	  <li data-bind-class='items.targetsStatus'>
-	    <span data-bind='items.healthyTargets'></span>
+	  <li data-bind-class='targetsstatus'>
+	    <span data-bind='healthyTargets'></span>
 	    targets healthy
 	  </li>
-	  <li data-bind-class='items.targetsStatus' >
-	   <span data-bind='items.targets'></span>
+	  <li data-bind-class='targetsstatus' >
+	   <span data-bind='targets'></span>
 	    targets expected
 	  </li>
 	</ul>  
 </div>
-<div data-showif="items.lost | equals true">
-    <h3 data-bind='items.service'></h3>
+<div data-showif="lost | equals true">
+    <h3 data-bind='service'></h3>
     <ul>
       <li class='failure'>
          <h4 class='title'>Service Not Found</h4>

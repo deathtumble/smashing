@@ -6,21 +6,19 @@ class Dashing.Service extends Dashing.Widget
     
   countDown: =>
     if this.executed == false
-        data = { 
-            items: {
-                service: this.title,
-                lost: true,
-                source: "countdown",
-                runningTasks: 0,
-                desiredTasks: 0,
-                tasksStatus: 'success',
-                target: 0,
-                healthyTargets: 0,
-                targetsStatus: 'success'
-            },
+        data = {
+            service: this.title,
+            lost: true,
+            eventsource: "countdown",
+            runningTasks: 0,
+            desiredTasks: 0,
+            tasksstatus: 'success',
+            target: 0,
+            healthyTargets: 0,
+            targetsstatus: 'success'
             id: this.id,
             updatedAt: new Date
-        }
+         }
     
         this.receiveData(data);
 
@@ -29,28 +27,27 @@ class Dashing.Service extends Dashing.Widget
     return
 
   onData: (data) ->
-    if data.items.source == 'events' 
+    if data.eventsource == 'events' 
         this.executed = true
-        data.items.lost = false;
+        data.lost = false;
     
-    if data.items.runningTasks == 0 or data.items.runningTasks < data.items.desiredTasks
-      data.items.tasksStatus = 'failure' 
+    if data.runningTasks == 0 or data.runningTasks < data.desiredTasks
+      data.tasksstatus = 'failure' 
     else 
-      data.items.tasksStatus = 'success'   
+      data.tasksstatus = 'success'   
         
-    if data.items.targets == 0 || data.items.healthyTargets < data.items.targets
-      data.items.targetsStatus = 'failure'
+    if data.targets == 0 || data.healthyTargets < data.targets
+      data.targetsstatus = 'failure'
     else 
-      data.items.targetsStatus = "success"
+      data.targetsstatus = "success"
     
-    data.items.serviceurl = this.url 
-    data.items.title = this.title
-    data.items.service = this.title
+    data.serviceurl = this.url 
+    data.title = this.title
+    data.service = this.title
     
-    this.items = data.items
-    
-    @set 'items', this.items
-
-    console.log(data.items.service, ": ", data.items.source, ", ", data.items.lost, ", ", data.items.tasksStatus);
+    @set 'title', data.title
+    @set 'serviceurl', data.serviceurl 
+    @set 'tasksstatus', data.tasksstatus
+    @set 'targetsstatus', data.targetsstatus
     
     data        

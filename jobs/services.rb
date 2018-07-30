@@ -31,17 +31,19 @@ SCHEDULER.every '10s' do
     status = {
         :service => serverName.split(/-/).first, 
         :product => product, 
-        :environment => environment, 
+        :environment => environment,
         :desiredTasks => desiredTasks, 
         :runningTasks => runningTasks, 
+        :tasksstatus => "success", 
         :targets => targets, 
         :healthyTargets => healthyTargets,
+        :targetsstatus => "success", 
         :lost => "false",
         :serviceurl => "",
-        :source => "events"
+        :eventsource => "events"
      }
 
-    send_event(eventName, { :items => status})
+    send_event(eventName, status)
     
     if (environments.has_key?(environment))
       statuses = environments[environment] 
