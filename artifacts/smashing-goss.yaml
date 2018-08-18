@@ -1,5 +1,5 @@
 file:
-  /opt/consul/conf/smashing-consul.json:
+  /etc/consul/smashing-consul.json:
     exists: true
     mode: "0644"
     owner: root

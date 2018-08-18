@@ -34,7 +34,7 @@ ENV PORT 3030
 EXPOSE ${PORT}
 WORKDIR /smashing
 
-VOLUME ["/opt/consul/conf/"]
+VOLUME ["/etc/consul/"]
 VOLUME ["/etc/goss/"]
 
 COPY artifacts/startup-script /var/startup-script
