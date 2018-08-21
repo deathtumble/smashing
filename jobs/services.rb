@@ -4,7 +4,7 @@ require 'json'
 
 SCHEDULER.every '10s' do
 
-  proxyUri = "http://172.17.0.1:8080/services";
+  proxyUri = "http://172.17.0.1:8081/services";
   uri = URI.parse(proxyUri)
   http = Net::HTTP.new(uri.host, uri.port)
   request = Net::HTTP::Get.new(uri.request_uri)
