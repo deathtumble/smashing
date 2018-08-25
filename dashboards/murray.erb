@@ -2,7 +2,7 @@
 $(function() {
   // These settings override the defaults set in application.coffee. You can do this on a per dashboard basis.
   Dashing.widget_base_dimensions = [370, 340]
-  Dashing.numColumns = 3
+  Dashing.numColumns = 4
 });
 </script>
 <% content_for :title do %>Murray's Environment Status<% end %>
@@ -10,26 +10,34 @@ $(function() {
 <div class="gridster">
   <ul>
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="service_consul_murray" data-view="Service" data-title="Consul" data-url="http://consul.murray.urbanfortress.uk"></div>
+      <div data-id="service_consul_murray" data-view="Service" data-title="consul" data-url="http://consul.murray.urbanfortress.uk"></div>
     </li>
 
     <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
-      <div data-id="service_dashing_murray" data-view="Service" data-title="Dashing" data-url="http://dashing.murray.urbanfortress.uk/prod"></div>
+      <div data-id="service_dashing_murray" data-view="Service" data-title="dashing" data-url="http://dashing.murray.urbanfortress.uk/prod"></div>
     </li>
 
     <li data-row="1" data-col="3" data-sizex="1" data-sizey="1">
-      <div data-id="service_nexus_murray" data-view="Service" data-title="Nexus" data-url="http://nexus.murray.urbanfortress.uk"></div>
+      <div data-id="service_nexus_murray" data-view="Service" data-title="nexus" data-url="http://nexus.murray.urbanfortress.uk"></div>
+    </li>
+
+    <li data-row="1" data-col="4" data-sizex="1" data-sizey="1">
+      <div data-id="service_aws_proxy_murray" data-view="Service" data-title="aws_proxy" data-url="http://nexus.murray.urbanfortress.uk"></div>
     </li>
 
     <li data-row="2" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="service_concourse_murray" data-view="Service" data-title="Concourse" data-url="http://concourse.murray.urbanfortress.uk"></div>
+      <div data-id="service_concourse_murray" data-view="Service" data-title="concourse" data-url="http://concourse.murray.urbanfortress.uk"></div>
     </li>
 
     <li data-row="2" data-col="2" data-sizex="1" data-sizey="1">
-      <div data-id="service_monitoring_murray" data-view="Service" data-title="Monitoring" data-url="http://monitoring.murray.urbanfortress.uk"></div>
+      <div data-id="service_grafana_murray" data-view="Service" data-title="grafana" data-url="http://grafana.murray.urbanfortress.uk"></div>
     </li>
 
     <li data-row="2" data-col="3" data-sizex="1" data-sizey="1">
+      <div data-id="service_prometheus_murray" data-view="Service" data-title="prometheus" data-url="http://prometheus.murray.urbanfortress.uk"></div>
+    </li>
+
+    <li data-row="2" data-col="4" data-sizex="1" data-sizey="1">
       <div data-id="health_murray" data-view="Health" data-environment="murray" data-title="Murray's Servers"></div>
     </li>
   </ul>
