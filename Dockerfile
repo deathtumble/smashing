@@ -30,6 +30,9 @@ COPY public /smashing/public
 COPY widgets /smashing/widgets 
 COPY jobs /smashing/jobs 
 
+ENV AWS_PROXY_HOST aws_proxy.server.consul
+ENV AWS_PROXY_PORT 8081
+
 ENV PORT 3030
 EXPOSE ${PORT}
 WORKDIR /smashing

@@ -6,6 +6,8 @@ services:
      - "8081:80"
      environment:
      - PORT=80
+     - AWS_PROXY_HOST=172.19.0.2
+     - AWS_PROXY_PORT=8080
      volumes:
       - ./dashboards:/dashboards
       - ./jobs:/jobs
