@@ -23,6 +23,7 @@ SCHEDULER.every '10s' do
     runningTasks = service["runningTasks"] 
     targets = service["targets"]
     healthyTargets = service["healthyTargets"]
+    targeted = service["targeted"]
     
     serviceName = serverName.split(/-/).first
     
@@ -32,6 +33,7 @@ SCHEDULER.every '10s' do
         :service => serverName.split(/-/).first, 
         :product => product, 
         :environment => environment,
+        :targeted => targeted,
         :desiredTasks => desiredTasks, 
         :runningTasks => runningTasks, 
         :tasksstatus => "success", 
